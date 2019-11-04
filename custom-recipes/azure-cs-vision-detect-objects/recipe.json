@@ -1,0 +1,40 @@
+{
+    "meta": {
+        "label": "Objects Detection",
+        "description": "Detect objects in images. Obtain bounding boxes as json or drawn or the original images.",
+        "icon": "icon-screenshot",
+        "iconColor": "blue"
+    },
+    "kind": "PYTHON",
+    "selectableFromFolder": "input-folder",
+    "inputRoles": [
+        {
+            "name": "input-folder",
+            "label": "Input Folder",
+            "description": "Folder containing the images to analyze",
+            "arity": "UNARY",
+            "required": true,
+            "acceptsDataset": false,
+            "acceptsManagedFolder": true
+        }
+    ],
+    "outputRoles": [
+        {
+            "name": "output-dataset",
+            "label": "Output Dataset",
+            "description": "Dataset containing the results from the Azure API",
+            "arity": "UNARY",
+            "required": true,
+            "acceptsDataset": true
+        }
+    ],
+    "params": [
+        {
+            "name": "connection_info",
+            "label": "Azure Connection",
+            "type": "PRESET",
+            "parameterSetId": "azure-cs-vision-connection-info",
+            "mandatory": true
+        }
+    ]
+}

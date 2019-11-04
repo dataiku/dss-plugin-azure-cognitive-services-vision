@@ -1,0 +1,53 @@
+{
+    "meta": {
+        "label": "Tag and Describe",
+        "description": "Assign categories (among 86), tags (among thousands) and English descriptions to Images.",
+        "icon": "icon-tags",
+        "iconColor": "blue"
+    },
+    "kind": "PYTHON",
+    "selectableFromFolder": "input-folder",
+    "inputRoles": [
+        {
+            "name": "input-folder",
+            "label": "Input Folder",
+            "description": "Folder containing the images to analyze",
+            "arity": "UNARY",
+            "required": true,
+            "acceptsDataset": false,
+            "acceptsManagedFolder": true
+        }
+    ],
+    "outputRoles": [
+        {
+            "name": "output-dataset",
+            "label": "Output Dataset",
+            "description": "Dataset containing the results from the Azure API",
+            "arity": "UNARY",
+            "required": true,
+            "acceptsDataset": true
+        }
+    ],
+    "params": [
+        {
+            "name": "connection_info",
+            "label": "Azure Connection",
+            "type": "PRESET",
+            "parameterSetId": "azure-cs-vision-connection-info",
+            "mandatory": true
+        }
+        // {
+        //     "name": "language",
+        //     "label": "Language",
+        //     "description": "Select which language to generate the description",
+        //     "type": "SELECT",
+        //     "selectChoices": [
+        //         {"value": "en", "label": "English, Default"},
+        //         {"value": "ja", "label": "Japanese"},
+        //         {"value": "pt", "label": "Portuguese"},
+        //         {"value": "zh", "label": "Simplified Chinese"}
+        //     ],
+        //     "defaultValue": "en"
+        // }
+    ]
+}

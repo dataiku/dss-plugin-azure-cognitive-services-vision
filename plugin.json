@@ -1,0 +1,13 @@
+{
+    "id": "azure-cognitive-services-vision",
+    "version": "2.0.0",
+    "meta": {
+        "label": "Azure Cognitive Services - Vision",
+        "description": "Use Microsoft Azure to process images (description generation, auto labeling, etc). No training required.",
+        "author": "Dataiku",
+        "icon": "icon-cloud",
+        "licenseInfo": "Apache Software License",
+        "url": "https://www.dataiku.com/dss/plugins/info/azure-cognitive-services-vision.html",
+        "tags": ["Microsoft Azure", "Cloud", "Images"]
+    }
+}
