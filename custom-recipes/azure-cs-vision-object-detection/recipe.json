@@ -22,10 +22,19 @@
         {
             "name": "output-dataset",
             "label": "Output Dataset",
-            "description": "Dataset containing the results from the Azure API",
+            "description": "Objects labels and coordinates",
             "arity": "UNARY",
-            "required": true,
+            "required": false,
             "acceptsDataset": true
+        },
+        {
+            "name": "output-folder",
+            "label": "Output Folder",
+            "description": "Images with bounding boxes drawn",
+            "arity": "UNARY",
+            "required": false,
+            "acceptsDataset": false,
+            "acceptsManagedFolder": true
         }
     ],
     "params": [
@@ -35,6 +44,11 @@
             "type": "PRESET",
             "parameterSetId": "azure-cs-vision-connection-info",
             "mandatory": true
+        },
+        {
+            "name": "should_output_raw_results",
+            "label": "Output Raw Response?",
+            "type": "BOOLEAN"
         }
     ]
 }

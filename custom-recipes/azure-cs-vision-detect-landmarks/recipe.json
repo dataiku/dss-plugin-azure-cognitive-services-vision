@@ -1,6 +1,6 @@
 {
     "meta": {
-        "label": "Landmarks Detection",
+        "label": "Landmark Detection",
         "description": "Detect landmarks in images.",
         "icon": "icon-globe",
         "iconColor": "blue"

@@ -49,5 +49,11 @@
         //     ],
         //     "defaultValue": "en"
         // }
+        ,
+        {
+            "name": "should_output_raw_results",
+            "label": "Output Raw Response?",
+            "type": "BOOLEAN"
+        }
     ]
 }

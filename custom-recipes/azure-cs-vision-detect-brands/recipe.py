@@ -3,7 +3,7 @@ import json
 import dataiku
 import pandas as pd
 from dataiku.customrecipe import *
-from dku_azure_cs import *
+from dku_azure_vision import *
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
 
 #==============================================================================

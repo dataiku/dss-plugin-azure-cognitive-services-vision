@@ -1,17 +1,16 @@
 import os
 import json
 import dataiku
-import pandas as pd
 from dataiku.customrecipe import *
-from dku_azure_cs import *
-from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
+from dku_azure_vision import *
 
 #==============================================================================
 # SETUP
 #==============================================================================
 
 connection_info = get_recipe_config().get('connection_info')
-language = get_recipe_config().get('language', 'en')
+language = get_recipe_config().get('language')
+should_output_raw_results = get_recipe_config().get('should_output_raw_results')
 
 input_folder_name = get_input_names_for_role('input-folder')[0]
 input_folder = dataiku.Folder(input_folder_name)
@@ -20,39 +19,33 @@ input_folder_path = input_folder.get_path()
 output_dataset_name = get_output_names_for_role('output-dataset')[0]
 output_dataset = dataiku.Dataset(output_dataset_name)
 
+client = get_client(connection_info)
+
 #==============================================================================
 # RUN
 #==============================================================================
 
-def process_image(image, client):
-    row = {}
-    visual_features = [VisualFeatureTypes.categories, VisualFeatureTypes.description]
-    response = client.analyze_image_in_stream(image, visual_features, language=language)
-    categories = []
-    for cat in response.categories:
-        categories.append(cat.name)
-    row["categories"] = json.dumps(categories)
-    if len(response.description.captions):
-        row["caption"] = response.description.captions[0].text
-    row["tags"] = json.dumps(response.description.tags[0:5])
-    return row, response
+output_schema = [
+    {"name": "file_path", "type": "string"},
+    {"name": "predicted_categories", "type": "string"},
+    {"name": "predicted_tags", "type": "string"},
+    {"name": "predicted_caption", "type": "string"}
+]
+if should_output_raw_results:
+    output_schema.append({"name": "raw_results", "type": "string"})
+output_dataset.write_schema(output_schema)
 
-def run(process_image, client):
-    rows = []
-    for filepath in os.listdir(input_folder_path):
+writer = output_dataset.get_writer()
+for filepath in os.listdir(input_folder.get_path()):
+    if supported_image_format(filepath):
+        with open(os.path.join(input_folder.get_path(), filepath), "rb") as image_file:
+            row, response = describe_image(image_file, client, language=language)
+            if should_output_raw_results:
+                row["raw_results"] = json.dumps(response, default=lambda x: x.__dict__)
+    else:
+        logging.warn("Cannot score file (only JPEG, JPG and PNG extension are supported): " + filepath)
         row = {}
-        if supported_image_format(filepath):
-            path = os.path.join(input_folder_path, filepath)
-            image = open(path, "rb")
-            row, response = process_image(image, client)
-            row["raw_results"] = json.dumps(response, default=lambda x: x.__dict__)
-        else:
-            logger.warn("Cannot score file (only JPEG, JPG and PNG extension are supported): " + filepath)
-        row["file_name"] = filepath
-        rows.append(row)
-    return pd.DataFrame(rows)
+    row["file_path"] = filepath
+    writer.write_row_dict(row)
 
-client = get_client(connection_info)
-df = run(process_image, client)
-
-output_dataset.write_with_schema(df)
+writer.close()
