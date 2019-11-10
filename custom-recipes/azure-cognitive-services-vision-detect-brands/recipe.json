@@ -1,8 +1,8 @@
 {
     "meta": {
-        "label": "Landmark Detection",
-        "description": "Detect landmarks in images.",
-        "icon": "icon-globe",
+        "label": "Brands Detection",
+        "description": "Detect logos in images",
+        "icon": "icon-building",
         "iconColor": "blue"
     },
     "kind": "PYTHON",
@@ -35,6 +35,11 @@
             "type": "PRESET",
             "parameterSetId": "azure-cs-vision-connection-info",
             "mandatory": true
+        },
+        {
+            "name": "should_output_raw_results",
+            "label": "Output Raw Response?",
+            "type": "BOOLEAN"
         }
     ]
 }

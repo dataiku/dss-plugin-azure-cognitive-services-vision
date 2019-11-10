@@ -3,7 +3,7 @@ import json
 import dataiku
 from PIL import Image
 from dataiku.customrecipe import *
-from dku_azure_vision import supported_image_format, get_client, detect_objects
+from dku_azure_vision import *
 from bbox import draw_bounding_boxes
 
 #==============================================================================
@@ -11,7 +11,6 @@ from bbox import draw_bounding_boxes
 #==============================================================================
 
 logging.basicConfig(level=logging.INFO, format='[Azure Cognitive Services Plugin] %(levelname)s - %(message)s')
-logging.getLogger().setLevel(logging.INFO)
 
 connection_info = get_recipe_config().get('connection_info')
 should_output_raw_results = get_recipe_config().get('should_output_raw_results')
