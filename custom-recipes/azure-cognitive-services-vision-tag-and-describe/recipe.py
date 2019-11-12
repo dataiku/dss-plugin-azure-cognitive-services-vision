@@ -12,11 +12,11 @@ connection_info = get_recipe_config().get('connection_info')
 language = get_recipe_config().get('language')
 should_output_raw_results = get_recipe_config().get('should_output_raw_results')
 
-input_folder_name = get_input_names_for_role('input-folder')[0]
+input_folder_name = get_input_names_for_role('input_folder')[0]
 input_folder = dataiku.Folder(input_folder_name)
 input_folder_path = input_folder.get_path()
 
-output_dataset_name = get_output_names_for_role('output-dataset')[0]
+output_dataset_name = get_output_names_for_role('output_dataset')[0]
 output_dataset = dataiku.Dataset(output_dataset_name)
 
 client = get_client(connection_info)

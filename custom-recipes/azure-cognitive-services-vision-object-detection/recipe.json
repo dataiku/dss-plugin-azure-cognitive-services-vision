@@ -6,10 +6,10 @@
         "iconColor": "blue"
     },
     "kind": "PYTHON",
-    "selectableFromFolder": "input-folder",
+    "selectableFromFolder": "input_folder",
     "inputRoles": [
         {
-            "name": "input-folder",
+            "name": "input_folder",
             "label": "Input Folder",
             "description": "Folder containing the images to analyze",
             "arity": "UNARY",
@@ -20,7 +20,7 @@
     ],
     "outputRoles": [
         {
-            "name": "output-dataset",
+            "name": "output_dataset",
             "label": "Output Dataset",
             "description": "Objects labels and coordinates",
             "arity": "UNARY",
