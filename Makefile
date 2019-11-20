@@ -1,5 +1,5 @@
 PLUGIN_VERSION=2.0.0
-PLUGIN_ID=azure-cognitive-services-nlp
+PLUGIN_ID=azure-cognitive-services-vision
 
 plugin:
 	cat plugin.json|json_pp > /dev/null
